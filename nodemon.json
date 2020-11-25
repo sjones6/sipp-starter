@@ -2,5 +2,5 @@
   "watch": ["app"],
   "ext": "ts,tsx,json",
   "ignore": ["src/**/*.spec.ts"],
-  "exec": "ts-node ./app"
+  "exec": "tsc && node ./dist/"
 }

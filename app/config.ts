@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { IAppConfig } from '@sjones6/ts-mvc';
+import { IAppConfig } from 'sipp';
 
 export const config: IAppConfig = {
   static: 'public',
@@ -13,5 +13,11 @@ export const config: IAppConfig = {
   migrations: {
     directory: join(process.cwd(), '/migrations'),
     tableName: '_migrations',
-  }
+  },
+  session: {
+    secret: process.env.SESSION_SECRET || 'keyboard cat',
+  },
+  csrf: {
+    cookie: true,
+  },
 }

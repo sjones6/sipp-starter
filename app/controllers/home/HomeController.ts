@@ -1,4 +1,4 @@
-import { Controller, Get } from "@sjones6/ts-mvc";
+import { Controller, Get } from "sipp";
 import { home, HomeProps } from "./views/home";
 
 export class HomeController extends Controller {

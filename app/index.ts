@@ -1,5 +1,5 @@
-import { App } from '@sjones6/ts-mvc';
-import { controllers } from './routes';
+import { App } from '@sjones6/sipp';
+import { controllers } from './controllers';
 import { config } from './config'
 
 App.bootstrap(config)
