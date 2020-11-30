@@ -1,14 +1,11 @@
-import { Controller, Get } from "sipp";
-import { home, HomeProps } from "./views/home";
+import { Controller, Get, RequestContext } from "sipp";
+import { home } from "./home.views";
 
 export class HomeController extends Controller {
-  basePath = ''
+  basePath = '';
 
-  @Get() // GET: /
-  getHome() {
-    return this.view<HomeProps>( // render a view and return HTML
-      home, // this is a JSX function that renders HTML
-      { title: "Home", header: "Hello world!" } // props passed to the view
-    );
+  @Get()
+  getHome(ctx: RequestContext) {
+    return home({ title: "Home", header: "Hello world!" }, ctx);
   }
 }

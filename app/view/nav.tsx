@@ -6,7 +6,7 @@ export const Nav = ({ ctx }: { ctx: RequestContext }) => <nav class="bg-gray-800
       <h1 class="text-2xl text-white font-bold">Sipp Starter</h1>
     </a>
     <div class="self-center text-white">
-      {ctx.session.has('user') ? <a href={ctx.url('logout')}>logout</a> : <a href={ctx.url('login')}>login</a>}
+      {ctx.req.user ? <a href={ctx.url('logout')}>logout</a> : <a href={ctx.url('login')}>login</a>}
     </div>
   </div>
 </nav>

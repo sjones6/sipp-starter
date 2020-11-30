@@ -1,5 +1,6 @@
 import { h, RequestContext } from 'sipp';
 import { Nav } from './nav';
+import { Alerts } from './alerts';
 
 interface AppProps {
   title: string,
@@ -7,7 +8,7 @@ interface AppProps {
   children?: any,
 }
 
-export const App = (props: AppProps) => <html>
+export const App = (props: AppProps): string => <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"></meta>
@@ -17,6 +18,7 @@ export const App = (props: AppProps) => <html>
   <body class="bg-gray-100">
     <Nav ctx={props.ctx} />
     <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+      <Alerts session={props.ctx.session} />
      {props.children}
     </div>
   </body>
