@@ -7,11 +7,11 @@ import { profile } from './user.view';
 export class UserController extends Controller {
 
   @Get()
-  listUsers(session: RequestSession): Promise<User[]> {
+  listUsers(): Promise<User[]> {
     return User.query();
   }
 
-  @Get('/profile', { name: 'show.user' })
+  @Get('/profile', { name: 'profile' })
   profile(ctx: RequestContext) {
     return profile(ctx.req.user, ctx);
   }

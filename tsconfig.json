@@ -14,7 +14,8 @@
     "baseUrl": ".",
     "paths": {
       "@app/*": ["app/*"],
-      "sipp": ["node_modules/@sjones6/sipp"]
+      "sipp": ["node_modules/@sjones6/sipp"],
+      "sipp/*": ["node_modules/@sjones6/sipp/dist/*"]
     },
     "incremental": true,
   },

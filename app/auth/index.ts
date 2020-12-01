@@ -2,6 +2,7 @@ import { hash, compare } from 'bcrypt';
 import { User } from '@app/models/User';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
+import { Request } from 'express';
 
 declare global {
   namespace session {
@@ -14,15 +15,17 @@ declare global {
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
-  passReqToCallback: false,
+  passReqToCallback: true,
   session: true
 },
-  function (email, password, done) {
+  function (req: Request, email: string, password: string, done) {
     User.query().findOne('email', email).then(user => {
       if (!user) {
+        req.flash('error', 'Invalid username/password combination');
         return done(null, false);
       }
       return compare(password, user.password).then((passwordMatches) => {
+        !passwordMatches && req.flash('error', 'Invalid username/password combination');
         done(null, passwordMatches ? user : false)
       });
     })
@@ -42,4 +45,4 @@ passport.deserializeUser(function(id, done) {
 });
 
 export const init = [passport.initialize(), passport.session()];
-export const hashPassword = hash;
+export const hashPassword = (str: string) => hash(str, 10);

@@ -1,4 +1,4 @@
-import { localAuth, hashPasswordMiddleware, authenticated } from "@app/middleware/auth";
+import { localAuth, authenticated } from "@app/middleware/auth";
 import { User } from "@app/models/User";
 import { Controller, Get, Post, RequestSession, RequestContext, Apply, Logger } from "sipp";
 import { login, register } from './auth.view';
@@ -22,7 +22,7 @@ export class AuthController extends Controller {
   @Post('login', { name: 'login' })
   @Apply(localAuth)
   login(ctx: RequestContext) {
-    return this.redirect(ctx.url('show.user', { user: ctx.req.user.id } ));
+    return this.redirect(ctx.url('profile'));
   }
 
   @Get('register', { name: 'show.register' })
@@ -31,15 +31,15 @@ export class AuthController extends Controller {
   }
 
   @Post('register', { name: 'register' })
-  @Apply(hashPasswordMiddleware())
   async register(user: User, session: RequestSession, ctx: RequestContext) {
-    if (user.email && user.password && user.first_name && user.last_name) {
+    const validation = await user.validate();
+    if (validation.isValid) {
       await user.save();
       session.flash('success', 'Your account has been created! You may now login.');
-      return this.redirect('/login');
+      return this.redirect(ctx.url('show.login'))
     }
-    session.flash('error', 'Missing required values.');
-    return ctx.back();
+    session.flash('error', 'Please correct errors and retry.');
+    return register(ctx, user, validation);
   }
 
   @Get('logout', { name: 'logout' })
@@ -50,6 +50,6 @@ export class AuthController extends Controller {
         ? logger.error(`user ${ctx.req.user.id} encountered error logging out, ${err.message}`)
         : logger.info(`user ${ctx.req.user.id} logged out`);
     });
-    return this.redirect(ctx.url('show.login'));
+    return this.redirect(ctx.url('login'));
   }
 }

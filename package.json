@@ -8,7 +8,8 @@
   },
   "_moduleAliases": {
     "@app": "dist",
-    "sipp": "./node_modules/@sjones6/sipp/dist"
+    "sipp": "./node_modules/@sjones6/sipp/dist",
+    "sipp/": "./node_modules/@sjones6/sipp/dist/"
   },
   "scripts": {
     "prebuild": "rm -rf ./dist/",
@@ -18,7 +19,7 @@
   },
   "author": "sjones6",
   "dependencies": {
-    "@sjones6/sipp": "^0.0.15",
+    "@sjones6/sipp": "^0.0.17",
     "bcrypt": "^5.0.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
