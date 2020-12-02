@@ -1,15 +1,13 @@
 import * as Knex from "knex";
 
-const tableName = 'users';
+const tableName = 'posts';
 
 export async function up(knex: Knex): Promise<void> {
   return knex.schema
     .createTable(tableName, function (table) {
       table.increments('id');
-      table.string('first_name', 255).notNullable();
-      table.string('last_name', 255).notNullable();
-      table.string('email', 255).notNullable();
-      table.string('password', 255).notNullable();
+      table.text('content').notNullable();
+      table.integer('user_id', 255).notNullable();
     });
 }
 

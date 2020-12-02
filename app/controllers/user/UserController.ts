@@ -12,8 +12,15 @@ export class UserController extends Controller {
   }
 
   @Get('/profile', { name: 'profile' })
-  profile(ctx: RequestContext) {
-    return profile(ctx.req.user, ctx);
+  async profile(ctx: RequestContext) {
+    const { user } = ctx.req;
+    user.posts = await user.$relatedQuery('posts');
+    return profile(user, ctx);
+  }
+
+  @Get('/:user', { name: 'show.user' })
+  async showUser(user: User, ctx: RequestContext) {
+    return profile(user, ctx);
   }
 
   onException(exception: BaseException, ctx: RequestContext) {

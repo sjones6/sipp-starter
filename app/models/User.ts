@@ -1,6 +1,7 @@
 import { Model } from 'sipp';
 import { IsEmail, IsString, MinLength, MaxLength, IsInt, IsOptional, IsNotEmpty } from 'sipp/validation';
 import { hashPassword } from '@app/auth';
+import * as Models from '.';
 
 export class User extends Model {
 
@@ -33,7 +34,22 @@ export class User extends Model {
   })
   password: string;
 
+  posts?: Models.Post[]
+
   static tableName = 'users';
+
+  static get relationMappings() {
+    return {
+      posts: {
+        relation: Model.HasManyRelation,
+        modelClass: Models.Post,
+        join: {
+          from: `${User.tableName}.id`,
+          to: `${Models.Post.tableName}.user_id`
+        }
+      }
+    }
+  }
 
   /**
    * These values can be safely filled when creating via type-hint
