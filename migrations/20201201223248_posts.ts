@@ -7,7 +7,7 @@ export async function up(knex: Knex): Promise<void> {
     .createTable(tableName, function (table) {
       table.increments('id');
       table.text('content').notNullable();
-      table.integer('user_id', 255).notNullable();
+      table.integer('user_id', 255).references('users.id').notNullable();
     });
 }
 

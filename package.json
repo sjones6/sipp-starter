@@ -19,7 +19,7 @@
   },
   "author": "sjones6",
   "dependencies": {
-    "@sjones6/sipp": "^0.0.20",
+    "@sjones6/sipp": "^0.0.31",
     "bcrypt": "^5.0.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",

@@ -1,11 +1,12 @@
-import { Controller, Get, RequestContext } from "sipp";
-import { home } from "./home.views";
+import { Controller, Get } from "sipp";
+import { HomeView } from "./home.views";
+import { Post } from '@app/models';
 
 export class HomeController extends Controller {
   basePath = '';
 
   @Get()
-  getHome(ctx: RequestContext) {
-    return home({ title: "Home", header: "Hello world!" }, ctx);
+  async getHome() {
+    return new HomeView({ title: "Home", header: "Hello world!" }, await Post.query().withGraphFetched('user'));
   }
 }

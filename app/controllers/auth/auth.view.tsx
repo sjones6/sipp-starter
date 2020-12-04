@@ -1,4 +1,4 @@
-import { h, RequestContext, Old } from 'sipp';
+import { h, RequestContext } from 'sipp';
 import { App } from '@app/view/App';
 import { Input } from '@app/view/components/Input';
 import { Button } from '@app/view/components';
@@ -21,8 +21,8 @@ const RegistrationForm = ({ action, csrf, user, validation }: RegistrationFormPr
   <Button type='submit' label='Register' />
 </form>
 
-const LoginForm = ({ action, csrf, old }: { action: string, csrf: string, old: Old }) => <form action={action} method="post">
-  <Input label='Email' value={old.get<string>('email', '')} name='email' type='email' required />
+const LoginForm = ({ action, csrf }: { action: string, csrf: string }) => <form action={action} method="post">
+  <Input label='Email' value={''} name='email' type='email' required />
   <Input label='Password' value={''} name='password' type='password' required />
   {csrf}
   <Button class="mb-2" type='submit' label='Login' />
@@ -30,16 +30,16 @@ const LoginForm = ({ action, csrf, old }: { action: string, csrf: string, old: O
 
 export const login = (ctx: RequestContext): string => <App title='Login' ctx={ctx}>
   <h1 class='text-2xl text-gray-800'>Login</h1>
-  <LoginForm action={ctx.url('login')} old={ctx.old} csrf={ctx.csrfField()} />
+  <LoginForm action={ctx.url.alias('login')} csrf={ctx.csrfField()} />
   <div>
-    Don't have an account? <a class="underline hover:font-bold" href={ctx.url('show.register')}>Register</a>
+    Don't have an account? <a class="underline hover:font-bold" href={ctx.url.alias('show.register')}>Register</a>
   </div>
 </App>
 
 export const register = (ctx: RequestContext, user: User = new User(), validation: ValidationErrorCollection = new ValidationErrorCollection([])): string => <App title='Register' ctx={ctx}>
   <h1 class='text-2xl text-gray-800'>Login</h1>
-  <RegistrationForm action={ctx.url('register')} user={user} csrf={ctx.csrfField()} validation={validation} />
+  <RegistrationForm action={ctx.url.alias('register')} user={user} csrf={ctx.csrfField()} validation={validation} />
   <div>
-    Already have an account? <a class="underline hover:font-bold" href={ctx.url('show.login')}>Login</a>
+    Already have an account? <a class="underline hover:font-bold" href={ctx.url.alias('show.login')}>Login</a>
   </div>
 </App>

@@ -3,14 +3,7 @@ import { User } from '@app/models/User';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import { Request } from 'express';
-
-declare global {
-  namespace session {
-    interface SessionData {
-      user: User
-    }
-  }
-}
+export * from './Auth';
 
 passport.use(new LocalStrategy({
   usernameField: 'email',

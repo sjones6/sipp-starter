@@ -1,4 +1,4 @@
-import { h, RequestSession } from 'sipp';
+import { h, Session } from 'sipp';
 
 type AlertProps = {
   title: string,
@@ -19,7 +19,7 @@ const Alert = ({ title, message, color }: AlertProps) => <div class={`bg-${color
   {closeButton}
 </div>
 
-export const Alerts = ({ session }: { session: RequestSession }) => {
+export const Alerts = ({ session }: { session: Session }) => {
   const success = session.getFlash('success');
   const error = session.getFlash('error');
   const info = session.getFlash('info');

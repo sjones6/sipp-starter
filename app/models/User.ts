@@ -3,6 +3,14 @@ import { IsEmail, IsString, MinLength, MaxLength, IsInt, IsOptional, IsNotEmpty 
 import { hashPassword } from '@app/auth';
 import * as Models from '.';
 
+declare global {
+  namespace Express {
+    interface Request {
+      user?: User;
+    }
+  }
+}
+
 export class User extends Model {
 
   @IsEmail(undefined, {

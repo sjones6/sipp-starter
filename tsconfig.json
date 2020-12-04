@@ -17,7 +17,7 @@
       "sipp": ["node_modules/@sjones6/sipp"],
       "sipp/*": ["node_modules/@sjones6/sipp/dist/*"]
     },
-    "incremental": true,
+    "incremental": true
   },
   "exclude": ["node_modules", "dist", "migrations"]
 }
