@@ -1,14 +1,13 @@
-import * as Knex from "knex";
+import * as Knex from 'knex';
 
 const tableName = 'posts';
 
 export async function up(knex: Knex): Promise<void> {
-  return knex.schema
-    .createTable(tableName, function (table) {
-      table.increments('id');
-      table.text('content').notNullable();
-      table.integer('user_id', 255).references('users.id').notNullable();
-    });
+  return knex.schema.createTable(tableName, function (table) {
+    table.increments('id');
+    table.text('content').notNullable();
+    table.integer('user_id', 255).references('users.id').notNullable();
+  });
 }
 
 export async function down(knex: Knex): Promise<void> {

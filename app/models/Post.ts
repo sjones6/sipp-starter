@@ -3,7 +3,6 @@ import { IsNumber, IsString, MinLength } from 'sipp/validation';
 import * as Models from '.';
 
 export class Post extends Model {
-
   @IsString()
   @MinLength(1)
   content: string;
@@ -21,12 +20,12 @@ export class Post extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: Models.User,
         join: {
-          from: `${Post.tableName}.user_id`, 
+          from: `${Post.tableName}.user_id`,
           to: `${Models.User.tableName}.id`,
-        }
-      }
-    }
-  };
+        },
+      },
+    };
+  }
 
   static fillable() {
     return ['content'];

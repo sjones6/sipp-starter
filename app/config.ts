@@ -7,8 +7,8 @@ export const config: IAppConfig = {
     client: 'sqlite3',
     useNullAsDefault: true,
     connection: async () => ({
-      filename: join(process.cwd(), 'tmp', 'db.sqlite')
-    })
+      filename: join(process.cwd(), 'tmp', 'db.sqlite'),
+    }),
   },
   migrations: {
     directory: join(process.cwd(), '/migrations'),
@@ -20,4 +20,4 @@ export const config: IAppConfig = {
   csrf: {
     cookie: true,
   },
-}
+};

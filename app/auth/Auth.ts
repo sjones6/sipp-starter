@@ -1,4 +1,4 @@
-import { User } from "@app/models";
+import { User } from '@app/models';
 
 declare global {
   namespace Express {
@@ -9,7 +9,7 @@ declare global {
 }
 
 export class Auth {
-  constructor(public readonly user?: User) { }
+  constructor(public readonly user?: User) {}
 
   isAuthenticated(): boolean {
     return !!this.user;
