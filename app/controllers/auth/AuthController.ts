@@ -6,20 +6,18 @@ import {
   Get,
   Post,
   Session,
-  RequestContext,
   Apply,
   Logger,
   Url,
-  BaseException,
 } from 'sipp';
-import { login, register } from './auth.view';
+import { LoginView, RegistrationView } from './auth.view';
 
 export class AuthController extends Controller {
   basePath = '';
 
   @Get('login', { name: 'show.login' })
-  getLogin(ctx: RequestContext) {
-    return login(ctx);
+  getLogin() {
+    return new LoginView();
   }
 
   @Post('login', { name: 'login' })
@@ -29,8 +27,8 @@ export class AuthController extends Controller {
   }
 
   @Get('register', { name: 'show.register' })
-  getRegister(ctx: RequestContext) {
-    return register(ctx);
+  getRegister() {
+    return new RegistrationView();
   }
 
   @Post('register', { name: 'register' })
@@ -38,8 +36,7 @@ export class AuthController extends Controller {
     user: User,
     session: Session,
     url: Url,
-    logger: Logger,
-    ctx: RequestContext,
+    logger: Logger
   ) {
     const validation = await user.validate();
     if (validation.isValid) {
@@ -56,17 +53,17 @@ export class AuthController extends Controller {
           'error',
           'We could not create your account. If you already have an account, please login',
         );
-        return register(ctx, user, validation);
+        return new RegistrationView(user, validation);
       }
     }
     session.flash('error', 'Please correct errors and retry.');
-    return register(ctx, user, validation);
+    return new RegistrationView(user, validation);
   }
 
   @Get('logout', { name: 'logout' })
   @Apply(authenticated)
-  logout(logger: Logger, url: Url, auth: Auth, ctx: RequestContext) {
-    ctx.req.session.destroy((err) => {
+  async logout(logger: Logger, url: Url, auth: Auth, session: Session) {
+    await session.destroy().catch((err) => {
       err
         ? logger.error(
             `user ${auth.user.id} encountered error logging out, ${err.message}`,

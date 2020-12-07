@@ -1,4 +1,4 @@
-import { RequestContext, Resolve, View } from 'sipp';
+import { Provide } from 'sipp';
 import { App } from '@app/view/App';
 import { Post } from '@app/models';
 
@@ -7,18 +7,18 @@ interface HomeProps {
   header: string;
 }
 
-export class HomeView extends View {
+export class HomeView extends App {
   constructor(
     private readonly props: HomeProps,
     private readonly posts: Post[],
   ) {
     super();
+    this.title = props.title
   }
 
-  @Resolve()
-  render(h, ctx: RequestContext): string {
+  async renderBody(h): Promise<string> {
     return (
-      <App title={this.props.title} ctx={ctx}>
+      <div>
         <h1 class="text-2xl text-gray-800">{this.props.header}</h1>
         {this.posts.map((post) => (
           <div>
@@ -28,7 +28,7 @@ export class HomeView extends View {
             </p>
           </div>
         ))}
-      </App>
+      </div>
     );
   }
 }

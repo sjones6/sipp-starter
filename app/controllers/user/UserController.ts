@@ -7,10 +7,10 @@ import {
   Controller,
   Get,
   NotFoundException,
-  RequestContext,
   ForbiddenException,
   Url,
   View,
+  Params,
 } from 'sipp';
 import { ProfileView } from './user.view';
 
@@ -22,20 +22,21 @@ export class UserController extends Controller {
   }
 
   @Get('/profile', { name: 'profile' })
-  async profile(url: Url, auth: Auth) {
-    return this.redirect(url.alias('show.user', { user: auth.user.id }));
-  }
-
-  @Get('/:user', { name: 'show.user' })
-  showUser(): View {
+  async profile(auth: Auth) {
+    await auth.user.$loadRelated('posts');
     return new ProfileView();
   }
 
-  onException(exception: BaseException, ctx: RequestContext) {
+  @Get('/:user', { name: 'show.user' })
+  showUser(url: Url) {
+    return this.redirect(url.alias('profile'));
+  }
+
+  onException(exception: BaseException) {
     switch (true) {
       case exception instanceof ForbiddenException:
       case exception instanceof NotFoundException:
-        return this.redirect(ctx.url.alias('show.login'));
+        return this.redirect('/login');
     }
     return false;
   }

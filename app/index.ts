@@ -1,12 +1,15 @@
-import { App, RequestContext } from '@sjones6/sipp';
+import { App } from '@sjones6/sipp';
 import { controllers } from './controllers';
 import { config } from './config';
-import { init, Auth } from './auth';
+import { init } from './auth';
+import { providers } from './providers';
 
-App.bootstrap(config)
+const app = App.bootstrap(config)
   .withGlobalMiddleware(...init)
   .withControllers(...controllers)
-  .withResolver((resolver) => {
-    resolver.addResolver(Auth, (ctx: RequestContext) => new Auth(ctx.req.user));
-  })
-  .listen();
+  .withProviders(...providers);
+
+(async() => {
+  await app.wire();
+  app.listen();
+})();

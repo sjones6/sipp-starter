@@ -1,16 +1,16 @@
-import { RequestContext, Resolve, View } from 'sipp';
+import { Csrf, Url, Provide } from 'sipp';
 import { App } from '@app/view/App';
-import { User } from '@app/models/User';
 import { Button, TextArea } from '@app/view/components';
+import { Auth } from '@app/auth';
 
-export class ProfileView extends View {
-  @Resolve()
-  render(h, user: User, ctx: RequestContext) {
-    return (
-      <App title={`Welcome, ${user.first_name}!`} ctx={ctx}>
-        <h1>Welcome, {user.first_name}!</h1>
-        <form action={ctx.url.alias('post.create')} method="post">
-          {ctx.csrfField()}
+export class ProfileView extends App {
+  @Provide()
+  renderBody(h, auth: Auth, url: Url, csrf: Csrf) {
+    const { user } = auth;
+    return <div>
+      <h1>Welcome, {user.first_name}!</h1>
+        <form action={url.alias('post.create')} method="post">
+          {csrf.csrfField()}
           <TextArea label="Post Content" name="content" value="" />
           <Button label="submit" type="submit" />
         </form>
@@ -19,7 +19,6 @@ export class ProfileView extends View {
             <li>{post.content}</li>
           ))}
         </ol>
-      </App>
-    );
+    </div>;
   }
 }
