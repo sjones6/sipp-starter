@@ -1,5 +1,5 @@
-import { ViewProvider } from "./ViewProvider";
+import { AuthProvider } from "./AuthProvider";
 
 export const providers = [
-  new ViewProvider()
+  new AuthProvider()
 ];

@@ -1,7 +1,7 @@
 import {  IServiceRegistryFn, Req, ServiceProvider } from "@sjones6/sipp";
 import { Auth } from "../auth";
 
-export class ViewProvider extends ServiceProvider {
+export class AuthProvider extends ServiceProvider {
   register(register: IServiceRegistryFn) {
     register(
       '*',
