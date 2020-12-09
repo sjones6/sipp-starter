@@ -19,5 +19,5 @@
     },
     "incremental": true
   },
-  "exclude": ["node_modules", "dist", "migrations"]
+  "exclude": ["node_modules", "dist"]
 }

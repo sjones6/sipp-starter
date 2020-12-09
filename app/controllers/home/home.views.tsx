@@ -13,7 +13,7 @@ export class HomeView extends App {
     private readonly posts: Post[],
   ) {
     super();
-    this.title = props.title
+    this.title = props.title;
   }
 
   async renderBody(h): Promise<string> {
@@ -24,7 +24,7 @@ export class HomeView extends App {
           <div>
             <p>"{post.content}"</p>
             <p>
-              ~ {post.user.first_name} {post.user.last_name}{' '}
+              ~ {post.user.first_name} {post.user.last_name} ({post.user.email})
             </p>
           </div>
         ))}

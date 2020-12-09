@@ -1,15 +1,7 @@
 import { Auth } from '@app/auth';
 import { localAuth, authenticated } from '@app/middleware/auth';
 import { User } from '@app/models/User';
-import {
-  Controller,
-  Get,
-  Post,
-  Session,
-  Apply,
-  Logger,
-  Url,
-} from 'sipp';
+import { Controller, Get, Post, Session, Apply, Logger, Url } from 'sipp';
 import { LoginView, RegistrationView } from './auth.view';
 
 export class AuthController extends Controller {
@@ -32,12 +24,7 @@ export class AuthController extends Controller {
   }
 
   @Post('register', { name: 'register' })
-  async register(
-    user: User,
-    session: Session,
-    url: Url,
-    logger: Logger
-  ) {
+  async register(user: User, session: Session, url: Url, logger: Logger) {
     const validation = await user.validate();
     if (validation.isValid) {
       try {

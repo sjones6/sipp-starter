@@ -3,11 +3,8 @@
   "version": "0.0.0",
   "description": "",
   "main": "dist/app",
-  "app": {
-    "config": "dist/config"
-  },
   "_moduleAliases": {
-    "@app": "dist",
+    "@app": "dist/app",
     "sipp": "./node_modules/@sjones6/sipp/dist",
     "sipp/": "./node_modules/@sjones6/sipp/dist/"
   },
@@ -16,19 +13,22 @@
     "build": "tsc",
     "dev": "nodemon",
     "start": "node ./dist/app",
-    "prettier": "prettier --single-quote --trailing-comma all --write \"{app,test,migrations}/**/*.{js,ts,tsx}\""
+    "prettier": "prettier --single-quote --trailing-comma all --write \"{app,test,db}/**/*.{js,ts,tsx}\""
   },
   "author": "sjones6",
   "dependencies": {
-    "@sjones6/sipp": "^0.0.37",
+    "@sjones6/sipp": "^0.0.39",
     "bcrypt": "^5.0.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "sqlite3": "^5.0.0"
+    "pg": "^8.5.1"
   },
   "devDependencies": {
+    "@types/faker": "^5.1.5",
     "@types/node": "^14.14.6",
+    "faker": "^5.1.0",
     "nodemon": "^2.0.6",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "sqlite3": "^5.0.0"
   }
 }

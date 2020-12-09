@@ -4,12 +4,11 @@ import { config } from './config';
 import { init } from './auth';
 import { providers } from './providers';
 
-const app = App.bootstrap(config)
+App.bootstrap(config)
   .withGlobalMiddleware(...init)
   .withControllers(...controllers)
-  .withProviders(...providers);
-
-(async() => {
-  await app.wire();
-  app.listen();
-})();
+  .withProviders(...providers)
+  .wire()
+  .then((app) => {
+    app.listen();
+  });

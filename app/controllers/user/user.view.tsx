@@ -7,8 +7,9 @@ export class ProfileView extends App {
   @Provide()
   renderBody(h, auth: Auth, url: Url, csrf: Csrf) {
     const { user } = auth;
-    return <div>
-      <h1>Welcome, {user.first_name}!</h1>
+    return (
+      <div>
+        <h1>Welcome, {user.first_name}!</h1>
         <form action={url.alias('post.create')} method="post">
           {csrf.csrfField()}
           <TextArea label="Post Content" name="content" value="" />
@@ -19,6 +20,7 @@ export class ProfileView extends App {
             <li>{post.content}</li>
           ))}
         </ol>
-    </div>;
+      </div>
+    );
   }
 }

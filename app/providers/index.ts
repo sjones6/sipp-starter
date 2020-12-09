@@ -1,5 +1,3 @@
-import { AuthProvider } from "./AuthProvider";
+import { AuthProvider } from './AuthProvider';
 
-export const providers = [
-  new AuthProvider()
-];
+export const providers = [new AuthProvider()];

@@ -36,36 +36,41 @@ Once you've authenticated to the GitHub package registry, `npm i` should work an
 
 Copy the `.envexample` to the git-ignored `.env`. Update any values as needed.
 
-4. Run migrations: `npx sipp migrate up`
+4. Do an initial build: `npx run build`
+
+This is required in order to run migrations (next step).
+
+5. Run migrations: `npx knex migrate:latest`
 
 The starter kit uses SQLite as the database driver and includes everything you need to get started locally. You database will be written out to `tmp/db.sqlite`.
 
-5. Turn on the lights!
+Optional: you can run `npx knex seed:run` to input some initial users and posts.
+
+6. Turn on the lights!
 
 `npm run dev` will start a local development server on [localhost:3000](http://localhost:3000).
 
 The dev build includes watching of your system for file changes and will rebuild and restart whenever you make a change.
-
-## CLI
-
-The CLI is small but growing. You can access help and commands with `npx sipp --help`
 
 ## Directory Structure
 
 Here are the major pieces to be aware of:
 
 ```
-./migrations - all your DB migrations.
+./app - all the app code
+    index.ts - entry point
+    config.ts - application config
+    auth/* - authentication wiring
+    middleware/* - any custom middleware
+    controllers/* - controllers + local views
+    models/* - DB-backed models
+    view/* - global view templates + components
+./db/ - all your DB migrations.
+    migrations - all your DB migrations.
+    seeds - all your DB seeds.
+    knexfile.ts - DB config
 ./public - static assets like favicon.ico, CSS or JS
 ./tmp - temporary storage for development DB + logs
-./app - all the app code
-     index.ts - entry point
-     config.ts - application config
-     auth/* - authentication wiring
-     middleware/* - any custom middleware
-     controllers/*
-     models/*
-     view/*
 ```
 
 ## Bugs
