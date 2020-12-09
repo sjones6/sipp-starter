@@ -1,4 +1,3 @@
-import { Provide } from 'sipp';
 import { App } from '@app/view/App';
 import { Post } from '@app/models';
 

@@ -9,8 +9,6 @@ import {
   NotFoundException,
   ForbiddenException,
   Url,
-  View,
-  Params,
 } from 'sipp';
 import { ProfileView } from './user.view';
 

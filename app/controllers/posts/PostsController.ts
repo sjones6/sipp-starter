@@ -1,7 +1,7 @@
 import { Auth } from '@app/auth';
 import { authenticated } from '@app/middleware/auth';
 import { Post as PostModel } from '@app/models/Post';
-import { ApplyAll, Post, Controller, Session, Url, Res } from 'sipp';
+import { ApplyAll, Post, Controller, Session, Res } from 'sipp';
 
 @ApplyAll(authenticated)
 export class PostsController extends Controller {
