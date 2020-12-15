@@ -14,39 +14,29 @@ This starter kit includes the following
 * Form components in JSX
 * Styling with TailwindCSS
 
-## Access
-
-At the moment, the Sipp framework is only early access. You can [sign up](https://sipp.dev) or email us with your GitHub username to [hi@sipp.dev](mailto:hi@sipp.dev) in order to get early access and run this starter.
-
 ## Getting Started
 
 Once you have access to the Sipp package, you'll need to follow these steps:
 
-1. Authenticate to the GitHub npm registry.
-
-You can follow [Github's directions](https://docs.github.com/en/free-pro-team@latest/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages#authenticating-to-github-packages) to do so.
-
-You'll need a Personal Access Token linked to the account that has been added to the Sipp repository.
-
-2. Install dependencies
+1. Install dependencies
 
 Once you've authenticated to the GitHub package registry, `npm i` should work and the sipp framework and all dependencies should be installed.
 
-3. Update the `.env`.
+2. Update the `.env`.
 
 Copy the `.envexample` to the git-ignored `.env`. Update any values as needed.
 
-4. Do an initial build: `npx run build`
+3. Do an initial build: `npm run build`
 
 This is required in order to run migrations (next step).
 
-5. Run migrations: `npx knex migrate:latest`
+4. Run migrations: `npx knex migrate:latest`
 
 The starter kit uses SQLite as the database driver and includes everything you need to get started locally. You database will be written out to `tmp/db.sqlite`.
 
 Optional: you can run `npx knex seed:run` to input some initial users and posts.
 
-6. Turn on the lights!
+5. Turn on the lights!
 
 `npm run dev` will start a local development server on [localhost:3000](http://localhost:3000).
 
