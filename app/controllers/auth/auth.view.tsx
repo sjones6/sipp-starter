@@ -2,7 +2,7 @@ import { Csrf, h, Provide, Url } from 'sipp';
 import { App } from '@app/view/App';
 import { Input } from '@app/view/components/Input';
 import { Button } from '@app/view/components';
-import { ValidationErrorCollection } from '@sjones6/sipp/dist/validation';
+import { ValidationErrorCollection } from 'sipp/validation';
 import { User } from '@app/models/User';
 
 type RegistrationFormProps = {

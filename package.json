@@ -4,9 +4,7 @@
   "description": "",
   "main": "dist/app",
   "_moduleAliases": {
-    "@app": "dist/app",
-    "sipp": "./node_modules/@sjones6/sipp/dist",
-    "sipp/": "./node_modules/@sjones6/sipp/dist/"
+    "@app": "dist/app"
   },
   "scripts": {
     "prebuild": "rm -rf ./dist/",
@@ -17,7 +15,7 @@
   },
   "author": "sjones6",
   "dependencies": {
-    "@sjones6/sipp": "^0.0.39",
+    "sipp": "^0.0.42",
     "bcrypt": "^5.0.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
